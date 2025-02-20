@@ -4,10 +4,8 @@
 #define endl '\n'
 #define ll long long
 using namespace std;
-
-void solve()
+int main()
 {
-
     int n, root = -1; 
     cin >> n;
     vector<int> c(n+1),p(n+1);
@@ -18,30 +16,26 @@ void solve()
         if(p[i]==-1) root = i;
         else graph[p[i]].push_back(i);
     }
-    vector<int> del(n+1,1);
-    del[root]=0;
+    vector<int> track(n+1,1);
+    track[root]=0;
     for(int i=1;i<=n;i++)
     {
         if(p[i] == -1) continue;
         if(c[i] == 0)
         {
-            del[p[i]] = 0; 
-            del[i] = 0;
+            track[p[i]] = 0; 
+            track[i] = 0;
         }
     }
-    int f = 0;
+    int ans = 0;
     for(int i=1;i<=n;++i)
     {
-        if(del[i]) 
+        if(track[i]) 
         {
-            f = 1;
+            ans = 1;
             cout << i << " ";
         }
     }
-    if(!f) cout << "-1" << endl;
-}
-int main()
-{
-    solve();
+    if(!ans) cout << "-1" << endl;
     return 0;
 }
